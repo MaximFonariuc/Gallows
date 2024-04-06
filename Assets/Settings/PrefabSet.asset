@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PrefabSet
   m_EditorClassIdentifier: 
   <Panels>k__BackingField: []
-  <Screens>k__BackingField: []
+  <Screens>k__BackingField:
+  - {fileID: 3580009182683652017, guid: 30a9176e5a03454408eeeb5c9e17c5e0, type: 3}
+  - {fileID: 7142932352146696470, guid: 6e98431bd0b4832428957f1631fcd72c, type: 3}
   <Popups>k__BackingField:
   - {fileID: 6962055870169063778, guid: 6a62a5466dc30ad4db2f15d0e692ba03, type: 3}
   <Buttons>k__BackingField: []

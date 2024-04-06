@@ -3,64 +3,66 @@ using System.Linq;
 using Settings;
 using UI.Popups;
 using UnityEngine;
-using Utils;
 
-public class PopupSystem : MonoBehaviour
+namespace Navigation
 {
-    public GameObject Background;
-    private static PopupSystem _instance;
-
-    private static List<BasePopup> _currentPopups = new List<BasePopup>();
-
-    public void Start()
+    public class PopupSystem : MonoBehaviour
     {
-        _instance = this;
-    }
+        [SerializeField] private GameObject _background;
+        
+        private static PopupSystem _instance;
+        private static List<BasePopup> _currentPopups = new List<BasePopup>();
 
-    public static void ShowPopup<T>(PopupSettings settings = null) where T : BasePopup
-    {
-        var prefabPopup = SettingsProvider.Get<PrefabSet>().GetPopup<T>();
-        var popup = Instantiate(prefabPopup, _instance.Background.transform);
-        popup.Setup(settings);
-        _currentPopups.Add(popup);
-        ShowBackground();
-    }
-
-    public static void CloseAllPopups()
-    {
-        HideBackground();
-
-        List<BasePopup> popupsForClose = new List<BasePopup>(_currentPopups);
-
-        foreach (var basePopup in popupsForClose)
+        public void Start()
         {
-            basePopup.Close();
+            _instance = this;
         }
-    }
 
-    public static void CloseThisPopup(string popupId)
-    {
-        HideBackground();
-
-        var currentPopup = _currentPopups.FirstOrDefault(x => x.PopupId == popupId);
-        if (currentPopup == null)
+        public static void ShowPopup<T>(PopupSettings settings = null) where T : BasePopup
         {
-            _currentPopups.Clear();
+            var prefabPopup = SettingsProvider.Get<PrefabSet>().GetPopup<T>();
+            var popup = Instantiate(prefabPopup, _instance._background.transform);
+            popup.Setup(settings);
+            _currentPopups.Add(popup);
+            ShowBackground();
         }
-        else
+
+        public static void CloseAllPopups()
         {
-            _currentPopups.Remove(currentPopup);
+            HideBackground();
+
+            List<BasePopup> popupsForClose = new List<BasePopup>(_currentPopups);
+
+            foreach (var basePopup in popupsForClose)
+            {
+                basePopup.Close();
+            }
         }
-    }
 
-    private static void HideBackground()
-    {
-        _instance.Background.SetActive(false);
-    }
+        public static void CloseThisPopup(string popupId)
+        {
+            HideBackground();
 
-    private static void ShowBackground()
-    {
-        _instance.Background.SetActive(true);
-        _instance.Background.transform.SetAsLastSibling();
+            var currentPopup = _currentPopups.FirstOrDefault(x => x.PopupId == popupId);
+            if (currentPopup == null)
+            {
+                _currentPopups.Clear();
+            }
+            else
+            {
+                _currentPopups.Remove(currentPopup);
+            }
+        }
+
+        private static void HideBackground()
+        {
+            _instance._background.SetActive(false);
+        }
+
+        private static void ShowBackground()
+        {
+            _instance._background.SetActive(true);
+            _instance._background.transform.SetAsLastSibling();
+        }
     }
 }

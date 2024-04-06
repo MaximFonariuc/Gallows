@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5782409962114655077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2764664691748364647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -822,7 +822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6967772778230388686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3327009270950663714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2152708149283368752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1363,8 +1363,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192c62e2c5c28e54b8ef2f25362e7574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 0}
-  _lettterList: {fileID: 0}
+  _lettterList: {fileID: 2099587893356116640}
+  _gameStateKeyboard: {fileID: 3014863683896150765}
+  _hangmanParts:
+    _hagmanParts:
+    - {fileID: 844305055123044946}
+    - {fileID: 3484025051955604565}
+    - {fileID: 3167506131083720855}
+    - {fileID: 7763870796768941799}
+    - {fileID: 8538745598115802729}
+    - {fileID: 3865110822976748568}
+    - {fileID: 4171144955532359423}
 --- !u!1 &7977995529365908131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,7 +1391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &72988916232670106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1457,7 +1466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7125613448056969910
 RectTransform:
   m_ObjectHideFlags: 0
