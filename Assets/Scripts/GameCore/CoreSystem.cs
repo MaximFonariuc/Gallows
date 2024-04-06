@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Navigation;
 using SaveSystem;
 using Settings;
+using UI.Popups;
 using UI.Screens;
 using Utils;
 
@@ -12,12 +13,14 @@ namespace GameCore
     {
         private string _currentWord;
         private List<char> _openedLetters;
-
+        private UserData _userData;
+        private int _loseTurnCount;
         public void Setup() 
         {
-            var userData = SaveDataManager.LoadUserData();
-            _currentWord = SettingsProvider.Get<GameSettings>().GetRandomSecretWord(userData.CompletedWords);
+            _userData = SaveDataManager.LoadUserData();
+            _currentWord = SettingsProvider.Get<GameSettings>().GetRandomSecretWord(_userData.CompletedWords);
             var commonSettings = SettingsProvider.Get<CommonSettings>().Localizations;
+            
             SetupLevel(new GameScreenSettings()
             {
                 Letters = new List<char>(_currentWord.ToCharArray()),
@@ -37,8 +40,31 @@ namespace GameCore
             switch (levelState)
             {
                 case LevelStateType.Win:
+                    _userData.SetCompletedWords(_currentWord);
+                    PopupSystem.ShowPopup<NotificationGameStatePopup>(new NotificationCreateCharacterPopupSettings()
+                    {
+                        Content = "ПОБЕДА!!!",
+                        TitleButton = "ИГРАТЬ ЕЩЕ РАЗ",
+                        Action = () =>
+                        {
+                            PopupSystem.CloseAllPopups();
+                            Setup();
+                        }                    
+                    });
                     break;
                 case LevelStateType.Lose:
+                    _userData.SetLose();
+                    SaveDataManager.SaveUserData(_userData);
+                    PopupSystem.ShowPopup<NotificationGameStatePopup>(new NotificationCreateCharacterPopupSettings()
+                    {
+                        Content = "Они повесили Кучерявого Бобби",
+                        TitleButton = "ИГРАТЬ ЕЩЕ РАЗ",
+                        Action = () =>
+                        {
+                            PopupSystem.CloseAllPopups();
+                            Setup();
+                        }
+                    });
                     break;
             }
         }
@@ -50,8 +76,10 @@ namespace GameCore
                 if (!_openedLetters.Contains(letter))
                 {
                     _openedLetters.Add(letter);
+                    return true;
                 }
-                return true;
+                else
+                    _loseTurnCount++;
             }
             return false;
         }

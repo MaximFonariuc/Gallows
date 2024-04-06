@@ -8,14 +8,14 @@ namespace SaveSystem
     {
         private static readonly string USER_DATA_NAME = "UserData.json";
         
-        public static void SaveData<T>(T data, string fileName)
+        private static void SaveData<T>(T data, string fileName)
         {
             string path = Path.Combine(Application.persistentDataPath, fileName);
             string json = JsonConvert.SerializeObject(data);
             File.WriteAllText(path, json);
         }
 
-        public static T LoadData<T>(string fileName, T defaultData)
+        private static T LoadData<T>(string fileName, T defaultData)
         {
             string path = Path.Combine(Application.persistentDataPath, fileName);
 
