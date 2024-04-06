@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameCore;
 using Settings;
-using Settings.UI;
 using UnityEngine;
 
 namespace UI.Screens
