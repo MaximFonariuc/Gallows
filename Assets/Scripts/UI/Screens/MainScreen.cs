@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameCore;
 using Navigation;
 using Settings;
 using UnityEngine;
@@ -28,13 +29,8 @@ namespace UI.Screens
             switch (tabType)
             {
                 case MainTabType.Start:
-                    var commonSettings = SettingsProvider.Get<CommonSettings>().Localizations;
-                    NavigationController.Instance.ScreenTransition<GameScreen>(new GameScreenSettings()
-                    {
-                        Letters = new List<char>{'с','у','н','д','у','к'},
-                        StartChar = commonSettings.StartChar,
-                        EndChar = commonSettings.EndChar
-                    });
+                    NavigationController.Instance.ScreenTransition<GameScreen>();
+                    CoreSystem.Instance.Setup();
                     break;
                 case MainTabType.Settings:
                     

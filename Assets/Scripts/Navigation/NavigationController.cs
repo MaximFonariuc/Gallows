@@ -52,5 +52,8 @@ namespace Navigation
                 _currentScreen.Setup(settings);
             }
         }
+        
+        
+        
     }
 }

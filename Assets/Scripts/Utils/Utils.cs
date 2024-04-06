@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
 
 namespace Utils
 {
-    public static class Utils
+    public static class CustomUtils
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
@@ -14,13 +13,15 @@ namespace Utils
             {
                 return true;
             }
+
             if (enumerable is ICollection<T> collection)
             {
                 return collection.Count < 1;
             }
-            return !enumerable.Any(); 
+
+            return !enumerable.Any();
         }
-        
+
         public static T GetRandomElement<T>(this IEnumerable<T> collection)
         {
             if (collection == null)
@@ -29,7 +30,7 @@ namespace Utils
             }
 
             var list = collection as IList<T> ?? collection.ToList();
-    
+
             if (list.Count == 0)
             {
                 throw new InvalidOperationException("The collection is empty.");
@@ -52,6 +53,7 @@ namespace Utils
             return result;
         }
     }
+
     [Serializable]
     public class FloatRange
     {
@@ -63,6 +65,7 @@ namespace Utils
             Min = min;
             Max = max;
         }
+
         public float GetRandom() => Random.Range(Min, Max);
     }
 
@@ -77,6 +80,7 @@ namespace Utils
             Min = min;
             Max = max;
         }
+
         public int GetRandom() => Random.Range(Min, Max);
     }
 }

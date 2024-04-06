@@ -15,5 +15,7 @@ namespace UI.Items
             _title.text = title;
             _onClick = onClick;
         }
+
+        public void UnActiveKeboardItem() => _onClick = null;
     }
 }
