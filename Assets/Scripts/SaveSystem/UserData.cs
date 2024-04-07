@@ -6,19 +6,19 @@ namespace SaveSystem
     [Serializable]
     public class UserData
     {
-        public int WinCount;
-        public int LoseCount;
+        public int WinValue;
+        public int LoseValue;
         public List<string> CompletedWords { get; private set; } = new List<string>();
 
         public void SetCompletedWords(string word)
         {
-            WinCount++;
+            WinValue++;
             if (!CompletedWords.Contains(word))
                 CompletedWords.Add(word);
             
             SaveDataManager.SaveUserData(this);
         }
 
-        public void SetLose() => LoseCount++;
+        public void SetLose() => LoseValue++;
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   KeyboardLetterPrefab: {fileID: 1394961068285229724, guid: 0416ee43d29bcfa4b99b624f26e456df, type: 3}
   DefaultSecretWords:
   - "\u0421\u0423\u041D\u0414\u0423\u041A"
-  - "\u041F\u041E\u041A\u0415\u0420"
-  - "\u0412\u0418\u041B\u042B"
   - "\u0420\u0423\u041C\u0411\u0410"
   - "\u041A\u0410\u0420\u0410\u041C\u0411\u0410"
+  - "\u0412\u0418\u041B\u042B"
+  - "\u041F\u041E\u041A\u0415\u0420"

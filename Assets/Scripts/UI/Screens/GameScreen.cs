@@ -4,6 +4,7 @@ using GameCore;
 using Settings;
 using TMPro;
 using UI.Items;
+using UI.Panels;
 using UnityEngine;
 
 namespace UI.Screens
@@ -14,8 +15,7 @@ namespace UI.Screens
         [SerializeField] private Transform _gameStateKeyboard;
         [SerializeField] private Hangman _hangmanParts;
 
-        [SerializeField] private TMP_Text _winStatus;
-        [SerializeField] private TMP_Text _loseStatus;
+        [SerializeField] private ScorePanel _scorePanel;
 
         private List<LetterItem> _letterContainer = new List<LetterItem>();
         private List<KeyboardItem> _keyboardContainer = new List<KeyboardItem>();
@@ -31,8 +31,8 @@ namespace UI.Screens
             _hangmanParts.ResetHangman();
             _gameStateKeyboard.gameObject.SetActive(true);
             _currentLetterCount = gameScreenSettings.Letters.Count;
-            _winStatus.text = gameScreenSettings.WinCount;
-            _loseStatus.text = gameScreenSettings.LoseCount;
+            
+            _scorePanel.SetupScore();
 
             var letterSettings = SettingsProvider.Get<GameSettings>();
 
@@ -69,8 +69,11 @@ namespace UI.Screens
                             existingKeyboardItem.UnactiveKeyboardItem();
                         else
                         {
-                            if(_hangmanParts.ShowNextPart(_loseTurnCount)) 
+                            if(_hangmanParts.ShowNextPart(_loseTurnCount))
+                            {
                                 _gameStateKeyboard.gameObject.SetActive(false);
+                                _scorePanel.SetupScore();
+                            }
                             _loseTurnCount++;
                         }
                     }, SetLetterInContainer);
@@ -103,6 +106,7 @@ namespace UI.Screens
             {
                 _gameStateKeyboard.gameObject.SetActive(false);
                 CoreSystem.Instance.EndLevel(LevelStateType.Win);
+                _scorePanel.SetupScore();
             }
         }
     }
@@ -112,7 +116,5 @@ namespace UI.Screens
         public List<char> Letters;
         public char StartChar;
         public char EndChar;
-        public string WinCount;
-        public string LoseCount;
     }
 }

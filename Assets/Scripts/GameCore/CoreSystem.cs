@@ -27,8 +27,6 @@ namespace GameCore
                 Letters = new List<char>(_currentWord.ToCharArray()),
                 StartChar = commonSettings.StartChar,
                 EndChar = commonSettings.EndChar,
-                WinCount = _userData.WinCount.ToString(),
-                LoseCount = _userData.LoseCount.ToString()
             });
         }
 
