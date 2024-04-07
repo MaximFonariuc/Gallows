@@ -11,7 +11,8 @@ namespace Settings
         public LetterItem LetterPrefab;
         public KeyboardItem KeyboardLetterPrefab;
         public List<string> DefaultSecretWords;
-        public string GetRandomSecretWord(List<string> allCompletedWords)
+        
+        public string GetRandomSecretWord(List<string> allCompletedWords, string currentWord = null)
         {
             List<string> availableWords = new List<string>();
 
@@ -27,8 +28,16 @@ namespace Settings
             {
                 return DefaultSecretWords.GetRandomElement();
             }
+
+            string randomWord = availableWords.GetRandomElement();
             
-            return availableWords.GetRandomElement();
+            while (!string.IsNullOrEmpty(currentWord) && randomWord == currentWord)
+            {
+                randomWord = availableWords.GetRandomElement();
+            }
+
+            return randomWord;
         }
+
     }
 }

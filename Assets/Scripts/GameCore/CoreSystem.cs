@@ -13,15 +13,15 @@ namespace GameCore
     {
         private List<char> _openedLetters = new List<char>();
         private UserData _userData;
-        
+
         private string _currentWord;
-        
-        public void Setup() 
+
+        public void Setup()
         {
             _userData = SaveDataManager.LoadUserData();
-            _currentWord = SettingsProvider.Get<GameSettings>().GetRandomSecretWord(_userData.CompletedWords);
+            _currentWord = SettingsProvider.Get<GameSettings>().GetRandomSecretWord(_userData.CompletedWords, _currentWord);
             var commonSettings = SettingsProvider.Get<CommonSettings>().Localizations;
-            
+
             SetupLevel(new GameScreenSettings()
             {
                 Letters = new List<char>(_currentWord.ToCharArray()),
@@ -52,7 +52,7 @@ namespace GameCore
                         {
                             PopupSystem.CloseAllPopups();
                             Setup();
-                        }                    
+                        }
                     });
                     break;
                 case LevelStateType.Lose:
@@ -73,7 +73,7 @@ namespace GameCore
 
             _openedLetters = new List<char>();
         }
-        
+
         public bool CheckAndAddLetter(char letter)
         {
             if (_currentWord.Contains(letter))
@@ -83,10 +83,11 @@ namespace GameCore
                     _openedLetters.Add(letter);
                     return true;
                 }
+
                 return true;
             }
+
             return false;
         }
-        
     }
 }

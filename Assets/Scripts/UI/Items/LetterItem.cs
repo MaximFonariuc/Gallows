@@ -11,19 +11,14 @@ namespace UI.Items
         public char Letter { get; private set; }
         public bool IsActive => _title.alpha != 0 && gameObject.activeSelf;
 
-        public void Activity()
-        {
-            if(gameObject.activeSelf)
-                gameObject.SetActive(false);
-            else
-                gameObject.SetActive(true);
-        }
+        public void SetActive(bool state) => gameObject.SetActive(state);
 
         public void Setup(char title)
         {
             _title.text = title.ToString();
             Letter = title;
             _title.alpha = 0;
+            SetActive(true);
         }
 
         public void SetLetter() => _title.alpha = 1;

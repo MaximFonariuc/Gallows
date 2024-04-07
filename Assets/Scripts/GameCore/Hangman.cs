@@ -18,14 +18,19 @@ namespace GameCore
                     _hangmanParts[i].gameObject.SetActive(false);
             }
         }
-        public void ShowNextPart(int wrongAttempts)
+            
+        public bool ShowNextPart(int wrongAttempts)
         {
-            if (wrongAttempts < _hangmanParts.Count)
+            if (wrongAttempts < _hangmanParts.Count - 1)
                 _hangmanParts[wrongAttempts].gameObject.SetActive(true);
             else
             {
+                _hangmanParts[wrongAttempts].gameObject.SetActive(true);
                 CoreSystem.Instance.EndLevel(LevelStateType.Lose);
+                return true;
             }
+
+            return false;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace UI.Screens
             _gameStateKeyboard.gameObject.SetActive(true);
             _currentLetterCount = gameScreenSettings.Letters.Count;
             _winStatus.text = gameScreenSettings.WinCount;
-            _winStatus.text = gameScreenSettings.LoseCount;
+            _loseStatus.text = gameScreenSettings.LoseCount;
 
             var letterSettings = SettingsProvider.Get<GameSettings>();
 
@@ -40,9 +40,9 @@ namespace UI.Screens
             {
                 if (_letterContainer.Count < _currentLetterCount)
                     _letterContainer.Add(Instantiate(letterSettings.LetterPrefab, _lettterParent));
-                else if (_letterContainer.Count - i > _currentLetterCount )
-                    _letterContainer[_currentLetterCount - i].Activity();
-
+                else if (_letterContainer.Count - 1 - i >= _currentLetterCount )
+                    _letterContainer[_letterContainer.Count - 1 - i].SetActive(false);
+                
                 _letterContainer[i].Setup(gameScreenSettings.Letters[i]);
             }
 
@@ -63,19 +63,22 @@ namespace UI.Screens
                 if (existingKeyboardItem == null)
                 {
                     existingKeyboardItem = Instantiate(letterSettings.KeyboardLetterPrefab, _gameStateKeyboard);
+                    existingKeyboardItem.Setup(letter, () =>
+                    {
+                        if (CoreSystem.Instance.CheckAndAddLetter(copyLetter))
+                            existingKeyboardItem.UnactiveKeyboardItem();
+                        else
+                        {
+                            if(_hangmanParts.ShowNextPart(_loseTurnCount)) 
+                                _gameStateKeyboard.gameObject.SetActive(false);
+                            _loseTurnCount++;
+                        }
+                    }, SetLetterInContainer);
                     _keyboardContainer.Add(existingKeyboardItem);
                 }
-
-                existingKeyboardItem.Setup(letter, () =>
-                {
-                    if (CoreSystem.Instance.CheckAndAddLetter(copyLetter))
-                        existingKeyboardItem.UnactiveKeyboardItem();
-                    else
-                    {
-                        _hangmanParts.ShowNextPart(_loseTurnCount);
-                        _loseTurnCount++;
-                    }
-                }, SetLetterInContainer);
+                else
+                    existingKeyboardItem.SetActive();
+                
             }
         }
 

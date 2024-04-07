@@ -22,7 +22,8 @@ namespace SaveSystem
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                return JsonConvert.DeserializeObject<T>(json);
+                var data = JsonConvert.DeserializeObject<T>(json);
+                return data;
             }
             else
             {

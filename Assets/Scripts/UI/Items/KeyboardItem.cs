@@ -11,25 +11,24 @@ namespace UI.Items
         [SerializeField] private TMP_Text _title;
         [SerializeField] private Button _button;
 
-        private Action _onClick;
-        private Action<char> _setLetterInContainer;
-
+        private bool _activity = true;
         public char Letter { get; private set; }
+        public void SetActive() => _activity = true;
         public void Setup(char title, Action onClick, Action<char> setLetterInContainer)
         {
-            _onClick = onClick;
             _title.text = title.ToString();
             Letter = title;
             _button.onClick.AddListener(() =>
             {
-                if (_onClick != null)
+                if (_activity)
                 {
-                    _onClick?.Invoke();
-                    _setLetterInContainer?.Invoke(_title.text[0]);
+                    onClick?.Invoke();
+                    setLetterInContainer?.Invoke(_title.text[0]);
+                    _activity = false;
                 }
-            });            _setLetterInContainer = setLetterInContainer;
+            });           
         }
 
-        public void UnactiveKeyboardItem() => _onClick = null;
+        public void UnactiveKeyboardItem() => _activity = false;
     }
 }
