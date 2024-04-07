@@ -11,10 +11,11 @@ namespace GameCore
 {
     public class CoreSystem : MonoSingleton<CoreSystem>
     {
-        private string _currentWord;
-        private List<char> _openedLetters;
+        private List<char> _openedLetters = new List<char>();
         private UserData _userData;
-        private int _loseTurnCount;
+        
+        private string _currentWord;
+        
         public void Setup() 
         {
             _userData = SaveDataManager.LoadUserData();
@@ -25,7 +26,9 @@ namespace GameCore
             {
                 Letters = new List<char>(_currentWord.ToCharArray()),
                 StartChar = commonSettings.StartChar,
-                EndChar = commonSettings.EndChar
+                EndChar = commonSettings.EndChar,
+                WinCount = _userData.WinCount.ToString(),
+                LoseCount = _userData.LoseCount.ToString()
             });
         }
 
@@ -67,6 +70,8 @@ namespace GameCore
                     });
                     break;
             }
+
+            _openedLetters = new List<char>();
         }
         
         public bool CheckAndAddLetter(char letter)
@@ -78,8 +83,7 @@ namespace GameCore
                     _openedLetters.Add(letter);
                     return true;
                 }
-                else
-                    _loseTurnCount++;
+                return true;
             }
             return false;
         }

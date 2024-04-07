@@ -1695,10 +1695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192c62e2c5c28e54b8ef2f25362e7574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lettterList: {fileID: 2099587893356116640}
+  _lettterParent: {fileID: 2099587893356116640}
   _gameStateKeyboard: {fileID: 3014863683896150765}
   _hangmanParts:
-    _hagmanParts:
+    _hangmanParts:
     - {fileID: 844305055123044946}
     - {fileID: 3484025051955604565}
     - {fileID: 3167506131083720855}
@@ -1706,6 +1706,8 @@ MonoBehaviour:
     - {fileID: 8538745598115802729}
     - {fileID: 3865110822976748568}
     - {fileID: 4171144955532359423}
+  _winStatus: {fileID: 8738437391408027319}
+  _loseStatus: {fileID: 6140805315605813969}
 --- !u!1 &7977995529365908131
 GameObject:
   m_ObjectHideFlags: 0

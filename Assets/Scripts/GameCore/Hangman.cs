@@ -8,6 +8,24 @@ namespace GameCore
     [Serializable]
     public class Hangman
     {
-        [SerializeField] private List<Image> _hagmanParts;
+        [SerializeField] private List<Image> _hangmanParts;
+        
+        public void ResetHangman()
+        {
+            for (int i = 0; i < _hangmanParts.Count; i++)
+            {
+                if (_hangmanParts[i].gameObject.activeSelf)
+                    _hangmanParts[i].gameObject.SetActive(false);
+            }
+        }
+        public void ShowNextPart(int wrongAttempts)
+        {
+            if (wrongAttempts < _hangmanParts.Count)
+                _hangmanParts[wrongAttempts].gameObject.SetActive(true);
+            else
+            {
+                CoreSystem.Instance.EndLevel(LevelStateType.Lose);
+            }
+        }
     }
 }
