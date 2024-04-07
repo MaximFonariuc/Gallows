@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using GameCore;
 using Navigation;
 using Settings;
@@ -13,7 +14,13 @@ namespace UI.Screens
 
         private void Awake()
         {
-            _startButton.onClick.AddListener(() => { SelectTab(MainTabType.Start); });
+            _startButton.onClick.AddListener(() =>
+            {
+                _startButton.transform.DOScale(Vector3.one * 1.15f, 0.25f).SetEase(Ease.OutQuad).OnComplete(() =>
+                {
+                    _startButton.transform.DOScale(Vector3.one, 0.25f).SetEase(Ease.OutQuad).OnComplete(() => { SelectTab(MainTabType.Start); });
+                });
+            });
         }
 
         public override void Setup(ScreenSettings settings)
@@ -33,7 +40,7 @@ namespace UI.Screens
                     CoreSystem.Instance.Setup();
                     break;
                 case MainTabType.Settings:
-                    
+
                     break;
             }
         }
